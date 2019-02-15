@@ -1,6 +1,12 @@
 Movie Recommendation System
 
-
+File Directory Structure
+1. mongoDB collections
+    It contains the mongoDB collections in both .json and .wt format.
+2. movie recommendation website
+    It contains the source code of the frontend and the backend of my website, which can be found at https://tb-movie-recommendation-system.herokuapp.com/.
+3. storing data in mongo_db
+    It contains the python codes for storing necessary data in mongoDB.
 
 References:
 1. F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4, Article 19 (December 2015), 19 pages. DOI=http://dx.doi.org/10.1145/2827872
