@@ -44,6 +44,16 @@ def matrix_factorization(user_movie, usr):
                         error += ((regularization/2)*(user_features[user][feature]**2 + features_movie[feature][movie]**2))
         maxSteps -= 1
     
+    user_id = 0
+    for row in mycol1.find():
+    	mycol1.update_one(row, { "$set" : {"userID":user_id, "features":list(user_features[user_id])} })
+    	user_id += 1
+    
+    feature_no = 0
+    for row in mycol2.find():
+    	mycol2.update_one(row, { "$set" : {"feature":feature_no, "movie":list(features_movie[feature_no])} })
+    	feature_no += 1
+    
     new_user_movie = numpy.dot(user_features, features_movie)
     rank = []
     
