@@ -24,23 +24,27 @@ Codebase
 1. storing_data_in_mongo_db/storing_movies_in_mongo_db.py - 
     It creates a collection called movies in the mongodb database. Each document in the collection contains the following fields - title (title of the movie), year (year of realease of the movie), thumbnail_image, rating (imdb rating of the movie), synopsis (summary of the movie). The above information about a movie is obtained from the imdb library, which takes an imdb_movie_id as input and returns a json string containing the above information. The imdb_movie_id is obtained from the links.csv file (downloaded from movielens). Some of the popular genres were stored in the dictionary to maintain a count of how many movies of each genre is recorded. As soon as at least 10 movies of each genre is read, we will stop reading the csv file further. This was done so as to ensure that some number of movies from each genre is present.
 
-2. storing_data_in_mongo_db/creating_dummy_users.py
+2. storing_data_in_mongo_db/creating_dummy_users.py - 
     It creates a collection called ratings in the mongodb database. Each document in the collection contains the following fields - userID (unique number assigned to each user to identify them distinctly), movies (A list of ratings given by the user for every movie, if the user hasn't rated the movie, the default rating is considered as 0). The above information about the user ratings was obtained by reading the ratings.csv file obtained from movielens. In short it created dummy users which will be later needed for the collaborative filtering.
     
-3. storing_data_in_mongo_db/matrix_factor.py
+3. storing_data_in_mongo_db/matrix_factor.py - 
     It creates 2 collection - user_features, features_movie. These store the data of two factorized matrices, which will be used in matrix_factorization. Since we want to improve our search result with every search result, therefore the state of the matrices after minimizing the error will be stored.
 
-4. movie_recommendation_website/main.py
+4. movie_recommendation_website/main.py - 
     It controls the backend of my flask website, i.e. where should each link be redirected and how to handle the post request.
 
-5. movie_recommendation_website/user_based_collaborative.py
+5. movie_recommendation_website/user_based_collaborative.py - 
     It returns 10 movies, that a user should watch depending upon his current preferences. It uses the user_based_collaborative method to find these 10 movies. Users will be rated similar using the pearson correlation formula.
 
-6. movie_recommendation_website/item_based_collaborative.py
+6. movie_recommendation_website/item_based_collaborative.py - 
     It returns 10 movies, that a user should watch depending upon his current preferences. It uses the item_based_collaborative method to find these 10 movies. Items will be rated similar using the cosine similarity.
     
-7. movie_recommendation_website/matrix_factorization.py
+7. movie_recommendation_website/matrix_factorization.py - 
     It returns 10 movies, that a user should watch depending upon his current preferences. It uses the matrix factorization technique to find these 10 movies. The bigger matrix is factorized into 2 smaller matrices of size (numOfUsers)X5 and 5%(numOfMovies).
+
+Approach followed - 
+I first downloaded the movie dataset from the movielens site and then wrote a program to read the downloaded csv files and find a list of imdb_ids. Then using the imdb module I scrapped the imdb website for getting more information about that movie and finally stored them in mongoDB. Then I started reading about the 3 different recommendation methods. After understanding about each method, I started writing a code for them. To calculate the ratings of a new user, I needed dummy users. So I created them from the help of movielens. Finally, I was able to get 10 predicted movies for the given user. Then I started working on my website. I created a html site (mostly copying from google). Then I tried raising a post request from the html website and prosessing it in my main.py. When I was successfull doing it, I imported the 3 codes written before, in main.py and redirected the user to a page where his recommendations will be shown.
+After completing everything on my local server, I started deploying my website. But before that I needed my database to be accessible over internet as well. So, I used mLabs for storing my database on it and then simply deployed my app on heroku.
 
 References:
 1. F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM Transactions on Interactive Intelligent Systems (TiiS) 5, 4, Article 19 (December 2015), 19 pages. DOI=http://dx.doi.org/10.1145/2827872
