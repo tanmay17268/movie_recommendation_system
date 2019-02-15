@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Recommender System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style6.css') }}">
+</head>
+
+<body>
+
+  <div class="window-margin">
+	<div class="window">
+
+		<aside class="sidebar">
+			<div class="top-bar">
+				<p class="logo">MoviePLEX</p>
+			</div>
+		</aside>
+
+
+		<div class="main" role="main">
+
+			<div class="top-bar">
+
+				<ul class="top-menu">
+					<li><a href="#ubc">User-user collaborative filtering</a></li>
+					<li><a href="#ibc">Item-item collaborative filtering</a></li>
+					<li><a href="#mf">Matrix Factorization</a></li>
+				</ul>
+
+			</div> <!-- top bar -->
+
+			<div class="movie-list">
+				<div class="title-bar" id = "ubc">
+					<div class="left">
+						<p class="bold">User-User Recommendations</p>
+					</div> <!-- left -->
+				</div> <!-- title-bar -->
+				
+				<ul class="list">
+					{% for movie in ubc_movies %}
+						<li> <img src={{movie["thumbnail_image"]}} alt="" class="cover" />
+						<p class="title">{{movie["title"]}}</p>
+						<p class="genre">{{movie["year"]}}</p> </li>
+						<p style="padding-right: 5px;"></p>
+					{% endfor %}
+				</ul>
+				<br>
+
+				<div class="title-bar" id = "ibc">
+					<div class="left">
+						<p class="bold">Item-Item Recommendations</p>
+					</div> <!-- left -->
+				</div> <!-- title-bar -->
+
+				<ul class="list">
+					{% for movie in ibc_movies %}
+						<li> <img src={{movie["thumbnail_image"]}} alt="" class="cover" />
+						<p class="title">{{movie["title"]}}</p>
+						<p class="genre">{{movie["year"]}}</p> </li>
+						<p style="padding-right: 5px;"></p>
+					{% endfor %}
+				</ul>
+				<br>
+
+				<div class="title-bar" id = "mf">
+					<div class="left">
+						<p class="bold">Matrix Factorization</p>
+					</div> <!-- left -->
+				</div> <!-- title-bar -->
+				
+				<ul class="list">
+					{% for movie in mf_movies %}
+						<li> <img src={{movie["thumbnail_image"]}} alt="" class="cover" />
+						<p class="title">{{movie["title"]}}</p>
+						<p class="genre">{{movie["year"]}}</p> </li>
+						<p style="padding-right: 5px;"></p>
+					{% endfor %}
+				</ul>
+				<br>
+				
+			</div> <!-- movie list -->
+
+
+		</div> <!-- main -->
+
+	</div> <!-- window -->
+</div> <!-- window margin -->
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Recommender System</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style6.css') }}">
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script> -->
+
+</head>
+
+<body>
+
+  <div class="window-margin">
+	<div class="window">
+
+		<aside class="sidebar">
+			<div class="top-bar">
+				<p class="logo">MoviePLEX</p>
+			</div>
+
+			<menu class="menu">
+
+				<ul class="no-bullets">
+					<p style="font-family:georgia;">&nbsp;&nbsp;&nbsp;A movie Recommender System</p>
+					<br>
+					<p style="font-family:serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Built by Tanmay for Precog</p>
+				</ul>
+
+				<div class="separator"></div>
+
+				<p class="menu-name">Filter Movies</p>
+				<ul>
+					<li><a href="#">Comedy</a> </li>
+					<li><a href="#">Sci-Fi</a></li>
+					<li><a href="#">Horror</a></li>
+					<li><a href="#">Romance</a></li>
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Thriller</a></li>
+					<li><a href="#">Drama</a></li>
+					<li><a href="#">Mystery</a></li>
+					<li><a href="#">Crime</a></li>
+					<li><a href="#">Adventure</a></li>
+					<li><a href="#">Fantasy</a></li>
+					<li><a href="#">Documentary</a></li>
+				</ul>
+			</menu>
+		</aside>
+
+
+		<div class="main" role="main">
+
+			<div class="top-bar">
+				<br>
+				<ul class="top-menu">
+					<center>
+					<font size = "4">
+					<p style="font-family:georgia;"> Please rate at least 10 movies and click submit at the end of the page </p></font>
+				</center>
+				</ul>
+			</div> <!-- top bar -->
+
+
+			<div class="featured-movie">
+				<img class="cover" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/22043/backdrop_ggwxvq_1.jpg" alt="" class="cover" />
+				<p class="corner-title">Staff pick</p>
+
+				<div class="bottom-bar">
+					
+					<div class="title-container">
+						<span class="fa fa-play-circle"></span>
+						<b>Non-stop</b>
+					</div>
+
+					<div class="right">
+						<div class="stars">
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star-half-o"></span>
+							<span class="fa fa-star-o"></span>
+						</div>
+					</div> <!-- right -->
+				</div> <!-- bottom bar -->
+			</div> <!-- featured -->
+
+
+			<div class="movie-list">
+				<div class="title-bar">
+					<div class="left">
+						<p class="bold">Popular Movies</p>
+					</div> <!-- left -->
+				</div> <!-- title-bar -->
+				<form action="" method = "POST">
+					<ul class="list">
+						{% for movie in movies %}
+							<li> <img src={{movie["thumbnail_image"]}} alt="" class="cover" />
+							<p class="title">{{movie["title"]}}</p>
+							<p class="genre">{{movie["year"]}}</p>
+							Rating:
+							<select class = "form-control" name = {{loop.index0}}>
+								<option value = "0"> 0 </option>
+								<option value = "1"> 1 </option>
+								<option value = "2"> 2 </option>
+								<option value = "3"> 3 </option>
+								<option value = "4"> 4 </option>
+								<option value = "5"> 5 </option>
+							</select></li>
+							<p style="padding-right: 5px;"></p>
+						{% endfor %}
+					</ul>
+					<center> Please rate at least 10 movies</center>
+					<br>
+					<div class = "wrapper">
+						<button type = "submit" class="button">Submit</button>
+					</div>
+				</form>
+				<br><br>
+			</div> <!-- movie list -->
+
+
+		</div> <!-- main -->
+
+	</div> <!-- window -->
+</div> <!-- window margin -->
+  <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+
+  
+
+    <!-- <script  src="js/index.js"></script> -->
+
+
+
+
+</body>
+
+</html>
