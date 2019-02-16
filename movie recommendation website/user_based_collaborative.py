@@ -1,22 +1,29 @@
 def correlation(user_movie_rating, user1, user2):
-    common_movies, usr1_pref, usr2_pref, usr1_sq_pref, usr2_sq_pref, prod_sum = 0, 0, 0, 0, 0, 0
+    usr1_mean, usr1_movies, usr2_mean, usr2_movies, usr1_sq_pref, usr2_sq_pref, prod_sum = 0, 0, 0, 0, 0, 0, 0
     numOfMovies = len(user_movie_rating[0])
 
     for movie in range(numOfMovies):
+    	if user_movie_rating[user1][movie]!=0:
+    		usr1_mean += user_movie_rating[user1][movie]
+    		usr1_movies += 1
+    	if user_movie_rating[user2][movie]!=0:
+    		usr2_mean += user_movie_rating[user2][movie]
+    		usr2_movies += 1
+    
+    if usr2_movies == 0:
+    	return 0
+    usr1_mean = usr1_mean/usr1_movies
+    usr2_mean = usr2_mean/usr2_movies
+
+    for movie in range(numOfMovies):
         if user_movie_rating[user1][movie]!=0 and user_movie_rating[user2][movie]!=0:
-            common_movies += 1
-            usr1_pref += user_movie_rating[user1][movie]
-            usr2_pref += user_movie_rating[user2][movie]
-            usr1_sq_pref += (user_movie_rating[user1][movie]**2)
-            usr2_sq_pref += (user_movie_rating[user2][movie]**2)
-            prod_sum += (user_movie_rating[user1][movie]*user_movie_rating[user2][movie])
+            prod_sum += ((user_movie_rating[user1][movie] - usr1_mean)*(user_movie_rating[user2][movie] - usr2_mean))
+            usr1_sq_pref += ((user_movie_rating[user1][movie] - usr1_mean)**2)
+            usr2_sq_pref += ((user_movie_rating[user2][movie] - usr2_mean)**2)
 
-    if not common_movies:
-        return 0
-
-    num = prod_sum - ((usr1_pref*usr2_pref)/common_movies)
-    den = ((usr1_sq_pref - (usr1_pref**2)/common_movies)*(usr2_sq_pref - (usr2_pref**2)/common_movies))**0.5
-    return 0 if den == 0 else(num/den)
+    num = prod_sum
+    den = ((usr1_sq_pref*usr2_sq_pref)**0.5)
+    return 0 if den == 0 else (num/den)
 
 def user_recommendations(user_movie_rating, user1):
     numOfMovies = len(user_movie_rating[0])
